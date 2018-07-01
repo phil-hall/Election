@@ -1,0 +1,5 @@
+source("getData.R")
+source("calcVoteShare.R")
+source("prevYear.R")
+source("Swing.R")
+source("addIncumbent.R")
