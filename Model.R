@@ -27,12 +27,13 @@ varlist <- c("pano",
 modelData <- merge(swingData,data[varlist],by="pano")
 
 modelData <- modelData[!is.na(modelData$swing),]
+modelData <- modelData[(modelData$Party != "Other"),]
 
 modelData$Health <- modelData$c11HealthVeryGood + modelData$c11HealthGood
 modelData$NSSEC_High <- modelData$c11NSSECHigherManager + modelData$c11NSSECHigherProfessional
 modelData$Education <- modelData$c11QualLevel3 + modelData$c11QualLevel4
 
-fit <- lm(swing ~ swing_nat + Incumbent*Party + c11Unemployed16to24*Party + NSSEC_High*Party + Education*Party, data=modelData)
+fit <- lm(swing ~ swing_nat + Incumbent*Party + Education*Party + c11PopulationDensity*Party + NSSEC_High*Party, data=modelData)
 summary(fit)
 
 modelData$P <- predict(fit)
